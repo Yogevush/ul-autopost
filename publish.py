@@ -177,7 +177,13 @@ def main():
     post = ready[0]
     repo, ref = os.environ["REPO"], os.environ.get("REF", "main")
     folder = "videos" if post["type"] == "reel" else "images"
-    media_url = f"https://raw.githubusercontent.com/{repo}/{ref}/{folder}/{post['file']}"
+    # GitHub Pages מגיש וידאו עם סוג התוכן הנכון, raw מגיש אותו כזרם בתים.
+    # לכן וידאו הולך דרך Pages ותמונות יכולות ללכת בשתי הדרכים.
+    base = schedule.get("media_base")
+    if not base:
+        owner, name = repo.split("/")
+        base = f"https://{owner.lower()}.github.io/{name}"
+    media_url = f"{base.rstrip('/')}/{folder}/{post['file']}"
     log(f"מפרסם {post['type']}: {post['id']}\n{media_url}")
 
     page_id, page_token, ig_id = resolve_targets(token)
