@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face{font-family:Heebo;src:url(FONT_400) format('woff2');font-weight:400;font-display:block}
+  @font-face{font-family:Heebo;src:url(FONT_700) format('woff2');font-weight:700;font-display:block}
+  @font-face{font-family:Heebo;src:url(FONT_800) format('woff2');font-weight:800;font-display:block}
+
+  :root{
+    --navy:#1C2130;
+    --red:#BE1110;
+    --ink:#262A36;
+    --paper:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1920px;overflow:hidden}
+  body{font-family:Heebo,sans-serif;background:var(--navy)}
+
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden}
+
+  /* רקע: מדרג עדין + מבטא אדום שנע לאט, נותן תחושת חיים בלי הסחה */
+  #bg{position:absolute;inset:0;background:var(--navy)}
+  #bg.light{background:var(--paper)}
+  #glow{position:absolute;width:1500px;height:1500px;border-radius:50%;
+        left:-300px;top:-400px;filter:blur(180px);opacity:.5;
+        background:radial-gradient(circle,var(--red) 0%,transparent 65%)}
+  /* על רקע לבן הזוהר האדום משתלט, אז מנמיכים אותו לרמת מבטא בלבד */
+  #bg.light #glow{opacity:.13}
+
+  #rule{position:absolute;top:0;right:0;height:14px;background:var(--red)}
+
+  #content{position:absolute;inset:0;display:flex;flex-direction:column;
+           justify-content:center;padding:0 110px}
+
+  .line{color:var(--paper);font-weight:800;line-height:1.18;
+        letter-spacing:-1.5px;margin-bottom:38px;will-change:transform,opacity}
+  #bg.light ~ #content .line{color:var(--ink)}
+  .line .hl{color:var(--red)}
+  #bg.light ~ #content .line .hl{color:var(--red)}
+
+  .size-xl{font-size:118px}
+  .size-l{font-size:96px}
+  .size-m{font-size:76px;font-weight:700;letter-spacing:-1px}
+
+  #footer{position:absolute;bottom:120px;right:110px;left:110px;
+          display:flex;align-items:baseline;justify-content:space-between}
+  #brand{color:var(--paper);font-weight:800;font-size:52px;letter-spacing:-1px}
+  #domain{color:var(--red);font-weight:700;font-size:44px;direction:ltr}
+  #bg.light ~ #footer #brand{color:var(--ink)}
+
+  #tagline{position:absolute;bottom:74px;right:110px;color:var(--paper);
+           opacity:.55;font-weight:400;font-size:34px}
+  #bg.light ~ #tagline{color:var(--ink)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"><div id="glow"></div></div>
+  <div id="rule"></div>
+  <div id="content"></div>
+  <div id="footer">
+    <div id="brand">יוניק הרצאות</div>
+    <div id="domain">unique-lectures.co.il</div>
+  </div>
+  <div id="tagline">נבחרת המרצים של ישראל</div>
+</div>
+
+<script>
+// SCENES מוזרק על ידי הסקריפט של הבנייה.
+// כל סצנה: {at: שנייה שבה מתחילה, lines: [{text, size, hl}], light: אמת לרקע לבן}
+const SCENES = window.__SCENES__;
+const DURATION = window.__DURATION__;
+
+const stage   = document.getElementById('stage');
+const bg      = document.getElementById('bg');
+const glow    = document.getElementById('glow');
+const rule    = document.getElementById('rule');
+const content = document.getElementById('content');
+
+function easeOut(x){ return 1 - Math.pow(1 - x, 3); }
+function clamp(x){ return Math.max(0, Math.min(1, x)); }
+
+function sceneAt(t){
+  let cur = SCENES[0], idx = 0;
+  for (let i = 0; i < SCENES.length; i++){
+    if (t >= SCENES[i].at){ cur = SCENES[i]; idx = i; }
+  }
+  return {scene: cur, index: idx};
+}
+
+// מצייר את הפריים שמתאים לשנייה t. דטרמיניסטי לחלוטין, בלי אנימציות זמן אמת.
+window.render = function(t){
+  const {scene, index} = sceneAt(t);
+  const local = t - scene.at;
+
+  bg.className = scene.light ? 'light' : '';
+
+  // סרגל התקדמות עליון
+  rule.style.width = (clamp(t / DURATION) * 1080) + 'px';
+
+  // תנועת רקע איטית
+  const drift = Math.sin(t * 0.35) * 60;
+  glow.style.transform = `translate(${drift}px, ${drift * 0.6}px)`;
+
+  // בונים מחדש רק כשהסצנה מתחלפת
+  if (content.dataset.idx !== String(index)){
+    content.dataset.idx = String(index);
+    content.innerHTML = '';
+    scene.lines.forEach(l => {
+      const el = document.createElement('div');
+      el.className = 'line size-' + (l.size || 'l');
+      el.innerHTML = l.hl
+        ? l.text.replace(l.hl, `<span class="hl">${l.hl}</span>`)
+        : l.text;
+      content.appendChild(el);
+    });
+  }
+
+  // כל שורה נכנסת בתורה, 0.22 שניות הפרש
+  [...content.children].forEach((el, i) => {
+    const p = easeOut(clamp((local - i * 0.22) / 0.55));
+    el.style.opacity = p;
+    el.style.transform = `translateY(${(1 - p) * 54}px)`;
+  });
+
+  // דעיכה רכה בסוף
+  const fade = t > DURATION - 0.5 ? clamp((DURATION - t) / 0.5) : 1;
+  stage.style.opacity = fade;
+};
+
+window.__ready__ = true;
+</script>
+</body>
+</html>

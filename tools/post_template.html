@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face{font-family:Heebo;src:url(FONT_400) format('woff2');font-weight:400;font-display:block}
+  @font-face{font-family:Heebo;src:url(FONT_700) format('woff2');font-weight:700;font-display:block}
+  @font-face{font-family:Heebo;src:url(FONT_800) format('woff2');font-weight:800;font-display:block}
+
+  :root{--navy:#1C2130;--red:#BE1110;--ink:#262A36;--paper:#FFFFFF}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1350px;overflow:hidden}
+  body{font-family:Heebo,sans-serif}
+
+  #card{position:relative;width:1080px;height:1350px;overflow:hidden;
+        background:var(--navy);display:flex;flex-direction:column}
+  #card.light{background:var(--paper)}
+
+  #glow{position:absolute;width:1200px;height:1200px;border-radius:50%;
+        left:-280px;top:-360px;filter:blur(170px);opacity:.42;
+        background:radial-gradient(circle,var(--red) 0%,transparent 65%)}
+  #card.light #glow{opacity:.12}
+
+  #rule{position:absolute;top:0;right:0;width:280px;height:14px;background:var(--red)}
+
+  #body{position:relative;flex:1;display:flex;flex-direction:column;
+        justify-content:center;padding:0 96px}
+
+  h1{color:var(--paper);font-weight:800;letter-spacing:-1.6px;line-height:1.16;
+     font-size:92px;margin-bottom:34px}
+  #card.light h1{color:var(--ink)}
+  h1 .hl{color:var(--red)}
+
+  p{color:var(--paper);opacity:.82;font-weight:400;font-size:50px;line-height:1.45}
+  #card.light p{color:var(--ink);opacity:.78}
+
+  ul{list-style:none;margin-top:12px}
+  li{color:var(--paper);font-weight:700;font-size:56px;line-height:1.6;
+     padding-right:52px;position:relative}
+  #card.light li{color:var(--ink)}
+  li::before{content:"";position:absolute;right:0;top:32px;
+             width:22px;height:6px;background:var(--red)}
+
+  #foot{position:relative;padding:0 96px 84px;display:flex;
+        align-items:flex-end;justify-content:space-between}
+  #brand{color:var(--paper);font-weight:800;font-size:52px;letter-spacing:-1px}
+  #card.light #brand{color:var(--ink)}
+  #tag{color:var(--paper);opacity:.5;font-weight:400;font-size:32px;margin-top:6px}
+  #card.light #tag{color:var(--ink)}
+  #domain{color:var(--red);font-weight:700;font-size:42px;direction:ltr}
+</style>
+</head>
+<body>
+<div id="card">
+  <div id="glow"></div>
+  <div id="rule"></div>
+  <div id="body"></div>
+  <div id="foot">
+    <div>
+      <div id="brand">יוניק הרצאות</div>
+      <div id="tag">נבחרת המרצים של ישראל</div>
+    </div>
+    <div id="domain">unique-lectures.co.il</div>
+  </div>
+</div>
+<script>
+const D = window.__POST__;
+const card = document.getElementById('card');
+const body = document.getElementById('body');
+if (D.light) card.classList.add('light');
+
+const h = document.createElement('h1');
+h.innerHTML = D.hl ? D.title.replace(D.hl, `<span class="hl">${D.hl}</span>`) : D.title;
+if (D.title_size) h.style.fontSize = D.title_size + 'px';
+body.appendChild(h);
+
+if (D.body){ const p = document.createElement('p'); p.textContent = D.body; body.appendChild(p); }
+
+if (D.items){
+  const ul = document.createElement('ul');
+  D.items.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+  body.appendChild(ul);
+}
+window.__ready__ = true;
+</script>
+</body>
+</html>

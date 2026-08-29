@@ -1,0 +1,12 @@
+{
+  "hour_israel": 20,
+  "days": {
+    "sunday": "image",
+    "monday": "reel",
+    "tuesday": "image",
+    "wednesday": "image",
+    "thursday": null,
+    "friday": null,
+    "saturday": null
+  }
+}

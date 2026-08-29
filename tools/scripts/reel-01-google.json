@@ -1,0 +1,27 @@
+{
+  "duration": 20,
+  "scenes": [
+    { "at": 0,  "light": false, "lines": [
+      { "text": "מרצה?", "size": "xl" },
+      { "text": "תעשה בדיקה אחת עכשיו.", "size": "m" }
+    ]},
+    { "at": 4,  "light": false, "lines": [
+      { "text": "תכתוב בגוגל", "size": "m" },
+      { "text": "את התחום שלך", "size": "l" },
+      { "text": "והמילה הרצאה.", "size": "l" }
+    ]},
+    { "at": 8.5, "light": true, "lines": [
+      { "text": "מוצאים אותך?", "size": "xl", "hl": "אותך" }
+    ]},
+    { "at": 11.5, "light": false, "lines": [
+      { "text": "אם לא, בשביל הלקוח", "size": "m" },
+      { "text": "שמחפש בדיוק עכשיו,", "size": "m" },
+      { "text": "אתה לא קיים.", "size": "l", "hl": "לא קיים" }
+    ]},
+    { "at": 15.5, "light": false, "lines": [
+      { "text": "אנחנו בעמוד הראשון בגוגל", "size": "m" },
+      { "text": "בעשרות ביטויי חיפוש.", "size": "m" },
+      { "text": "עם הטלפון שלך.", "size": "l", "hl": "שלך" }
+    ]}
+  ]
+}
