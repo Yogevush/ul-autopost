@@ -100,7 +100,7 @@ window.render = function(t){
   rule.style.width = (clamp(t / DURATION) * 1080) + 'px';
 
   // תנועת רקע איטית
-  const drift = Math.sin(t * 0.35) * 60;
+  const drift = Math.sin(t * 0.55) * 70;
   glow.style.transform = `translate(${drift}px, ${drift * 0.6}px)`;
 
   // בונים מחדש רק כשהסצנה מתחלפת
@@ -117,9 +117,9 @@ window.render = function(t){
     });
   }
 
-  // כל שורה נכנסת בתורה, 0.22 שניות הפרש
+  // כל שורה נכנסת בתורה. קצב מהיר, הריל צריך לזוז.
   [...content.children].forEach((el, i) => {
-    const p = easeOut(clamp((local - i * 0.22) / 0.55));
+    const p = easeOut(clamp((local - i * 0.13) / 0.34));
     el.style.opacity = p;
     el.style.transform = `translateY(${(1 - p) * 54}px)`;
   });
