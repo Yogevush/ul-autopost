@@ -9,6 +9,9 @@
 
 הפלט: MP4, H.264 + AAC, 1080x1920, 30 פריימים לשנייה.
 בדיוק המפרט שאינסטגרם דורשת לריל.
+
+מוזיקה: שדה "music" בתסריט עם שם קובץ מתוך tools/music (למשל "bed-01.m4a").
+בלי השדה הזה הריל יוצא שקט.
 """
 
 import base64
@@ -64,13 +67,30 @@ def render_frames(html, duration, outdir):
     return total
 
 
-def encode(outdir, dest, duration):
+MUSIC_DIR = ROOT / "tools" / "music"
+
+
+def encode(outdir, dest, duration, music=None):
+    """מקודד את הפריימים לווידאו. עם פס מוזיקה (מ-tools/music, בלולאה ועם דעיכה בסוף)
+    או, אם אין, פס קול שקט. אינסטגרם מעדיפה ריל עם ערוץ אודיו תקין,
+    וריל עם מוזיקה נצפה יותר מריל שקט."""
     dest.parent.mkdir(parents=True, exist_ok=True)
-    # פס קול שקט. אינסטגרם מעדיפה ריל עם ערוץ אודיו תקין.
+    if music:
+        path = MUSIC_DIR / music
+        if not path.exists():
+            sys.exit(f"חסר קובץ מוזיקה: {path}")
+        audio_in = ["-stream_loop", "-1", "-i", str(path)]
+        fade = max(duration - 1.2, 0)
+        audio_filter = ["-af", f"atrim=0:{duration},afade=t=out:st={fade:.2f}:d=1.2,volume=0.9"]
+    else:
+        audio_in = ["-f", "lavfi", "-t", str(duration), "-i", "anullsrc=r=48000:cl=stereo"]
+        audio_filter = []
     subprocess.run([
         "ffmpeg", "-y", "-loglevel", "error",
         "-framerate", str(FPS), "-i", str(outdir / "f%05d.png"),
-        "-f", "lavfi", "-t", str(duration), "-i", "anullsrc=r=48000:cl=stereo",
+        *audio_in,
+        "-map", "0:v", "-map", "1:a",
+        *audio_filter,
         "-c:v", "libx264", "-profile:v", "high", "-level", "4.1",
         "-pix_fmt", "yuv420p", "-r", str(FPS), "-g", str(FPS * 2),
         "-b:v", "6M", "-maxrate", "8M", "-bufsize", "12M",
@@ -118,7 +138,7 @@ def main():
         print(f"מרנדר {script['duration']} שניות...")
         render_frames(html, script["duration"], outdir)
         print("מקודד...")
-        encode(outdir, dest, script["duration"])
+        encode(outdir, dest, script["duration"], script.get("music"))
     verify(dest)
 
 
