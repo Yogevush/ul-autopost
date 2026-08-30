@@ -1,12 +1,14 @@
 {
   "hour_israel": 20,
+  "window_hours": 4,
+  "page_id": "336797430024031",
   "media_base": "",
   "days": {
-    "sunday": "image",
-    "monday": "reel",
-    "tuesday": "image",
-    "wednesday": "image",
-    "thursday": null,
+    "sunday": "reel",
+    "monday": "post",
+    "tuesday": null,
+    "wednesday": "reel",
+    "thursday": "post",
     "friday": null,
     "saturday": null
   }
