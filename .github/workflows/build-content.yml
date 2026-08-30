@@ -23,6 +23,7 @@ jobs:
 
       - name: dependencies
         run: |
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
           npm install @fontsource/heebo
           pip install playwright
           playwright install --with-deps chromium
@@ -33,6 +34,7 @@ jobs:
           if [ ! -f tools/music/bed-01.m4a ]; then
             ffmpeg -y -i videos/reel-01-google.mp4 -vn -c:a copy tools/music/bed-01.m4a
           fi
+          ls -la tools/music
 
       - name: build carousel
         run: python3 tools/make_carousel.py tools/scripts/car-01-client-checks.json images/
