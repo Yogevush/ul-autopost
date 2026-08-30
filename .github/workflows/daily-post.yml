@@ -2,11 +2,19 @@ name: post
 
 on:
   schedule:
-    # מתעורר פעמיים ביום, ב-17:00 וב-18:00 UTC.
-    # הסקריפט מפרסם רק אם השעה בישראל היא 20:00, ולכן
-    # המעבר בין שעון קיץ לחורף מטופל לבד. אין מה לתקן.
-    - cron: '0 17 * * *'
-    - cron: '0 18 * * *'
+    # גיטהאב מאחר בהפעלת משימות מתוזמנות, לפעמים בשעות, ובמיוחד בתחילת שעה עגולה.
+    # לכן מתעוררים כמה פעמים, בדקות לא עגולות, לאורך הערב (שעון גריניץ').
+    # הסקריפט מפרסם רק בתוך חלון הפרסום בישראל (20:00 עד 23:59) ורק פעם ביום,
+    # ולכן המעבר בין שעון קיץ לחורף מטופל לבד. אין מה לתקן.
+    - cron: '7 17 * * *'
+    - cron: '37 17 * * *'
+    - cron: '7 18 * * *'
+    - cron: '37 18 * * *'
+    - cron: '7 19 * * *'
+    - cron: '37 19 * * *'
+    - cron: '7 20 * * *'
+    - cron: '37 20 * * *'
+    - cron: '7 21 * * *'
   workflow_dispatch:
     inputs:
       force:
@@ -16,8 +24,8 @@ on:
       force_type:
         description: 'מה לפרסם'
         type: choice
-        options: ['image', 'reel']
-        default: 'image'
+        options: ['post', 'reel', 'carousel', 'image']
+        default: 'post'
 
 permissions:
   contents: write
@@ -31,8 +39,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -52,5 +60,8 @@ jobs:
           git config user.name  "unique-lectures-bot"
           git config user.email "bot@users.noreply.github.com"
           git add -A state/
-          git diff --cached --quiet || git commit -m "state: $(date -u +%F)"
-          git push || true
+          if ! git diff --cached --quiet; then
+            git commit -m "state: $(date -u +%F)"
+            git pull --rebase origin "${{ github.ref_name }}" || true
+            git push || true
+          fi
