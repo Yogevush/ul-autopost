@@ -1,0 +1,26 @@
+{
+  "days": {
+    "2026-08-30": {
+      "instagram_followers": 13,
+      "instagram_posts": 3,
+      "facebook_followers": 308,
+      "facebook_likes": 308
+    }
+  },
+  "posts": {
+    "reel-01-google": {
+      "type": "reel",
+      "date": "2026-08-30",
+      "instagram": {
+        "reach": 1,
+        "views": 4,
+        "likes": 0,
+        "comments": 0,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 0
+      },
+      "updated": "2026-08-30"
+    }
+  }
+}
