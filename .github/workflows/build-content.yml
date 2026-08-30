@@ -1,0 +1,50 @@
+name: build-content
+
+# בונה את קבצי המדיה (תמונות, רילים, מוזיקה) מתוך התסריטים שבמאגר,
+# ישירות על שרתי גיטהאב. מפעילים ידנית מלשונית Actions כשצריך.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: dependencies
+        run: |
+          npm install @fontsource/heebo
+          pip install playwright
+          playwright install --with-deps chromium
+
+      - name: music from existing reel
+        run: |
+          mkdir -p tools/music
+          if [ ! -f tools/music/bed-01.m4a ]; then
+            ffmpeg -y -i videos/reel-01-google.mp4 -vn -c:a copy tools/music/bed-01.m4a
+          fi
+
+      - name: build carousel
+        run: python3 tools/make_carousel.py tools/scripts/car-01-client-checks.json images/
+
+      - name: build reel
+        run: python3 tools/make_reel.py tools/scripts/reel-02-pratfall.json videos/reel-02-pratfall.mp4
+
+      - name: commit
+        run: |
+          git config user.name  "unique-lectures-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add images videos tools/music
+          git diff --cached --quiet || git commit -m "תוכן חדש: קרוסלה וריל, נבנו בשרת"
+          git pull --rebase origin main || true
+          git push
