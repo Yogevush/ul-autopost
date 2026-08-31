@@ -34,6 +34,9 @@
   p{color:var(--paper);opacity:.82;font-weight:400;font-size:50px;line-height:1.45}
   #card.light p{color:var(--ink);opacity:.78}
 
+  p.note{margin-top:30px;font-size:42px;line-height:1.4;opacity:.72}
+  #card.light p.note{opacity:.7}
+
   ul{list-style:none;margin-top:12px}
   li{color:var(--paper);font-weight:700;font-size:56px;line-height:1.6;
      padding-right:52px;position:relative}
@@ -80,6 +83,13 @@ if (D.items){
   const ul = document.createElement('ul');
   D.items.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
   body.appendChild(ul);
+}
+
+if (D.note){
+  const n = document.createElement('p');
+  n.className = 'note';
+  n.textContent = D.note;
+  body.appendChild(n);
 }
 window.__ready__ = true;
 </script>
