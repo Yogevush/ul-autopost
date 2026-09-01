@@ -5,6 +5,12 @@
       "instagram_posts": 3,
       "facebook_followers": 308,
       "facebook_likes": 308
+    },
+    "2026-09-01": {
+      "instagram_followers": 13,
+      "instagram_posts": 4,
+      "facebook_followers": 308,
+      "facebook_likes": 308
     }
   },
   "posts": {
@@ -12,15 +18,29 @@
       "type": "reel",
       "date": "2026-08-30",
       "instagram": {
-        "reach": 1,
-        "views": 4,
+        "reach": 8,
+        "views": 20,
         "likes": 0,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-08-30"
+      "updated": "2026-09-01"
+    },
+    "car-01-client-checks": {
+      "type": "carousel",
+      "date": "2026-08-31",
+      "instagram": {
+        "reach": 11,
+        "views": 46,
+        "likes": 1,
+        "comments": 0,
+        "saved": 0,
+        "shares": 0,
+        "total_interactions": 1
+      },
+      "updated": "2026-09-01"
     }
   }
 }
