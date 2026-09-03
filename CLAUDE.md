@@ -19,6 +19,7 @@ git clone https://github.com/Yogevush/ul-autopost
 ## איפה נמצא מה
 
 - מצב הפרויקט וכל ההחלטות: `PROJECT.md`
+- הקמפיין הממומן במטא, כולל הנוסח המדויק של המודעה: `PAID-CAMPAIGN.md`
 - הסבר טכני על מערכת הפרסום: `README.md`
 - מה כבר פורסם: `state/published.json`
 - תור התוכן: `content/queue.json`
