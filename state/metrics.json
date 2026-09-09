@@ -53,6 +53,12 @@
       "instagram_posts": 8,
       "facebook_followers": 308,
       "facebook_likes": 308
+    },
+    "2026-09-09": {
+      "instagram_followers": 15,
+      "instagram_posts": 8,
+      "facebook_followers": 308,
+      "facebook_likes": 308
     }
   },
   "posts": {
@@ -61,42 +67,42 @@
       "date": "2026-08-30",
       "instagram": {
         "reach": 11,
-        "views": 25,
+        "views": 26,
         "likes": 0,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-09-08"
+      "updated": "2026-09-09"
     },
     "car-01-client-checks": {
       "type": "carousel",
       "date": "2026-08-31",
       "instagram": {
         "reach": 28,
-        "views": 87,
+        "views": 88,
         "likes": 5,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 6
       },
-      "updated": "2026-09-08"
+      "updated": "2026-09-09"
     },
     "reel-02-pratfall": {
       "type": "reel",
       "date": "2026-09-02",
       "instagram": {
         "reach": 23,
-        "views": 43,
+        "views": 45,
         "likes": 3,
         "comments": 0,
         "saved": 0,
         "shares": 8,
         "total_interactions": 11
       },
-      "updated": "2026-09-08"
+      "updated": "2026-09-09"
     },
     "post-03-lecturers": {
       "type": "image",
@@ -110,35 +116,35 @@
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-09-08"
+      "updated": "2026-09-09"
     },
     "post-04-google-first": {
       "type": "image",
       "date": "2026-09-06",
       "instagram": {
-        "reach": 9,
-        "views": 16,
+        "reach": 11,
+        "views": 18,
         "likes": 0,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 1
       },
-      "updated": "2026-09-08"
+      "updated": "2026-09-09"
     },
     "post-05-page-includes": {
       "type": "image",
       "date": "2026-09-07",
       "instagram": {
-        "reach": 6,
-        "views": 14,
+        "reach": 7,
+        "views": 15,
         "likes": 0,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-09-08"
+      "updated": "2026-09-09"
     }
   }
 }
