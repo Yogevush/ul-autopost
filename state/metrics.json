@@ -59,6 +59,12 @@
       "instagram_posts": 8,
       "facebook_followers": 308,
       "facebook_likes": 308
+    },
+    "2026-09-10": {
+      "instagram_followers": 15,
+      "instagram_posts": 8,
+      "facebook_followers": 308,
+      "facebook_likes": 308
     }
   },
   "posts": {
@@ -74,7 +80,7 @@
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-09-09"
+      "updated": "2026-09-10"
     },
     "car-01-client-checks": {
       "type": "carousel",
@@ -88,7 +94,7 @@
         "shares": 0,
         "total_interactions": 6
       },
-      "updated": "2026-09-09"
+      "updated": "2026-09-10"
     },
     "reel-02-pratfall": {
       "type": "reel",
@@ -102,35 +108,35 @@
         "shares": 8,
         "total_interactions": 11
       },
-      "updated": "2026-09-09"
+      "updated": "2026-09-10"
     },
     "post-03-lecturers": {
       "type": "image",
       "date": "2026-09-03",
       "instagram": {
-        "reach": 5,
-        "views": 18,
+        "reach": 6,
+        "views": 19,
         "likes": 0,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-09-09"
+      "updated": "2026-09-10"
     },
     "post-04-google-first": {
       "type": "image",
       "date": "2026-09-06",
       "instagram": {
         "reach": 11,
-        "views": 18,
+        "views": 20,
         "likes": 0,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 1
       },
-      "updated": "2026-09-09"
+      "updated": "2026-09-10"
     },
     "post-05-page-includes": {
       "type": "image",
@@ -144,7 +150,7 @@
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-09-09"
+      "updated": "2026-09-10"
     }
   }
 }
