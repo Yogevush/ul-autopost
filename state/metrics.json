@@ -71,6 +71,12 @@
       "instagram_posts": 8,
       "facebook_followers": 308,
       "facebook_likes": 308
+    },
+    "2026-09-12": {
+      "instagram_followers": 15,
+      "instagram_posts": 8,
+      "facebook_followers": 308,
+      "facebook_likes": 308
     }
   },
   "posts": {
@@ -86,7 +92,7 @@
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-09-11"
+      "updated": "2026-09-12"
     },
     "car-01-client-checks": {
       "type": "carousel",
@@ -100,63 +106,63 @@
         "shares": 0,
         "total_interactions": 6
       },
-      "updated": "2026-09-11"
+      "updated": "2026-09-12"
     },
     "reel-02-pratfall": {
       "type": "reel",
       "date": "2026-09-02",
       "instagram": {
         "reach": 23,
-        "views": 45,
+        "views": 46,
         "likes": 3,
         "comments": 0,
         "saved": 0,
         "shares": 8,
         "total_interactions": 11
       },
-      "updated": "2026-09-11"
+      "updated": "2026-09-12"
     },
     "post-03-lecturers": {
       "type": "image",
       "date": "2026-09-03",
       "instagram": {
-        "reach": 7,
-        "views": 21,
+        "reach": 8,
+        "views": 22,
         "likes": 0,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-09-11"
+      "updated": "2026-09-12"
     },
     "post-04-google-first": {
       "type": "image",
       "date": "2026-09-06",
       "instagram": {
-        "reach": 13,
-        "views": 22,
+        "reach": 15,
+        "views": 25,
         "likes": 0,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 1
       },
-      "updated": "2026-09-11"
+      "updated": "2026-09-12"
     },
     "post-05-page-includes": {
       "type": "image",
       "date": "2026-09-07",
       "instagram": {
-        "reach": 7,
-        "views": 15,
+        "reach": 9,
+        "views": 18,
         "likes": 0,
         "comments": 0,
         "saved": 0,
         "shares": 0,
         "total_interactions": 0
       },
-      "updated": "2026-09-11"
+      "updated": "2026-09-12"
     }
   }
 }
